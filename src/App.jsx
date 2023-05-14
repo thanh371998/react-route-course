@@ -1,4 +1,4 @@
-import { Link, NavLink, Routes, Route } from 'react-router-dom';
+import { Link, NavLink, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Contact from './pages/Contact';
@@ -6,10 +6,18 @@ import About from './pages/About';
 import ContactDetail from './pages/ContactDetail';
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  console.log('loction', location)
 
   return (
     <>
       <h2>Navbar</h2>
+
+      <button type="button" onClick={() => {
+        navigate('/home')
+      }}>Navigate Home</button>
 
       <ul>
         <li>
@@ -49,7 +57,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />}>
-            <Route path=":id" element={<ContactDetail />} />
+            <Route path=":contactId" element={<ContactDetail />} />
+            <Route path=":id/:productId" element={<ContactDetail />} />
             <Route path="news" element={<div>contact new</div>} />
           </Route>
           {/* <Route path="/contact/:id" element={<ContactDetail />} />
